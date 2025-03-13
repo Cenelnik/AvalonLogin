@@ -33,8 +33,10 @@ public class MainViewModel : ViewModelBase
     private string _sustemText = "Login or password is wrong!";
     public string SystemText { get => _sustemText; set => this.RaiseAndSetIfChanged(ref _sustemText, value); }
 
-    public string Login { get; set; }
-    public string Password { get; set; }
+    private string _login;
+    public string Login { get => _login; set => this.RaiseAndSetIfChanged(ref _login, value); }
+    private string _password;   
+    public string Password { get => _login; set => this.RaiseAndSetIfChanged(ref _login, value); }
 
     public ReactiveCommand<Unit, Unit> LoginCommand { get; }
     public void CancelButton()
@@ -45,11 +47,13 @@ public class MainViewModel : ViewModelBase
     }
     public async void LoginButton()
     {
+        //this.SystemText = "skdjvbksjkdbvikujsbfvikujsdbviujsbd;ovbsedujio;bv";
+        //this.Visible = true;
         UserLogin dataLogin = new UserLogin();
         dataLogin.Mail = this.Login;
         dataLogin.PasswordHash = this.Password; // userEditor.Hash.GetHash(this.Password);
         bool result = userEditor.Checker.CheckPass(dataLogin);
         this.Visible = result;
-        this.SystemText = result ? "Login or password is wrong!":"We passed login!";
+        this.SystemText = result ? "We passed login!": "Login or password is wrong!";
     }
 }

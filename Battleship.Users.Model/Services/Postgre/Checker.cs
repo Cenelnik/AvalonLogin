@@ -19,17 +19,24 @@ namespace Battleship.Users.Model.Services.Postgre
         
         public bool CheckPass(UserLogin user)
         {
-            using (UserDbContext context = new UserDbContext(_connectToDb))
-            { 
-                UserDB userDb = context.Users.Where(u => u.Mail == user.Mail).FirstOrDefault();
-                if (userDb != null)
+            try
+            {
+                using (UserDbContext context = new UserDbContext(_connectToDb))
                 {
-                    return userDb.PasswordHash == user.PasswordHash;
+                    UserDB userDb = context.Users.Where(u => u.Mail == user.Mail).FirstOrDefault();
+                    if (userDb != null)
+                    {
+                        return userDb.PasswordHash == user.PasswordHash;
+                    }
+                    else
+                    {
+                        //
+                    }
                 }
-                else 
-                {
-                    //
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             return false;
         }

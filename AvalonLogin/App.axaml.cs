@@ -20,7 +20,7 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        userEditor = new User("Server=192.168.1.6;Port=5432;User Id=postgres;Password=1HUF!zLRnCKM-kV0;Database=Project");
+        userEditor = new User("Server=localhost;Port=5432;User Id=postgres;Password=1HUF!zLRnCKM-kV0;Database=Project");
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
