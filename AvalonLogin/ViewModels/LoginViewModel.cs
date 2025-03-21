@@ -3,27 +3,30 @@ using Avalonia.Controls;
 using AvalonLogin.Views;
 using ReactiveUI;
 using System.Reactive;
-
-namespace AvalonLogin.ViewModels;
-
-using Battleship.Users.Avalonia.Views;
 using Battleship.Users.Common.DTO;
 using Battleship.Users.Common.IServices;
 using ReactiveUI;
 
-public class MainViewModel : ViewModelBase
+namespace AvalonLogin.ViewModels;
+
+public class LoginViewModel : BasePageViewModel
 {
     public IUserEditorable userEditor;
 
     private ViewModelBase _content;
     public ViewModelBase Context { get => _content; set => this._content = value; }
-    public MainViewModel(IUserEditorable Editor)
+    public LoginViewModel(IUserEditorable Editor)
     {
         LoginCommand = ReactiveCommand.Create(LoginButton);
         Context = this;
         userEditor = Editor;
     }
-    
+
+    public LoginViewModel()
+    {
+    }
+    public override string StSubmit { get => "Login"; }
+
     private bool _visible = false;
     public bool Visible { get => _visible; set => this.RaiseAndSetIfChanged(ref _visible, value); }
     private string _loginLable = "Write your login:";
@@ -43,12 +46,9 @@ public class MainViewModel : ViewModelBase
     {
         this.Visible = false;
         this.SystemText = "";
-
     }
     public async void LoginButton()
     {
-        //this.SystemText = "skdjvbksjkdbvikujsbfvikujsdbviujsbd;ovbsedujio;bv";
-        //this.Visible = true;
         UserLogin dataLogin = new UserLogin();
         dataLogin.Mail = this.Login;
         dataLogin.PasswordHash = this.Password; // userEditor.Hash.GetHash(this.Password);

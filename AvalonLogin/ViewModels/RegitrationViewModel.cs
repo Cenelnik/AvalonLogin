@@ -6,14 +6,10 @@ using System.Reactive;
 
 namespace AvalonLogin.ViewModels;
 
-using AvalonLogin.Views;
 using ReactiveUI;
 
-public class GameViewModel : BasePageViewModel
+public class RegitrationViewModel : BasePageViewModel
 {
-    public GameViewModel()
-    { 
-    }
-    public override string StSubmit { get => "Play"; }
 
+    public override string StSubmit { get => "Registration"; }
 }
