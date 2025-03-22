@@ -6,6 +6,7 @@ using System.Reactive;
 using Battleship.Users.Common.DTO;
 using Battleship.Users.Common.IServices;
 using ReactiveUI;
+using System.Threading.Tasks;
 
 namespace AvalonLogin.ViewModels;
 
@@ -17,7 +18,7 @@ public class LoginViewModel : BasePageViewModel
     public ViewModelBase Context { get => _content; set => this._content = value; }
     public LoginViewModel(IUserEditorable Editor)
     {
-        LoginCommand = ReactiveCommand.Create(LoginButton);
+        RegistrationComand = ReactiveCommand.Create(RegistredComand);
         Context = this;
         userEditor = Editor;
     }
@@ -41,19 +42,28 @@ public class LoginViewModel : BasePageViewModel
     private string _password;   
     public string Password { get => _login; set => this.RaiseAndSetIfChanged(ref _login, value); }
 
-    public ReactiveCommand<Unit, Unit> LoginCommand { get; }
-    public void CancelButton()
+    public void RegistredComand()
     {
-        this.Visible = false;
-        this.SystemText = "";
+        this.Return();
     }
-    public async void LoginButton()
+
+    public ReactiveCommand<Unit, Unit> RegistrationComand { get; }
+    public override async Task<bool> Return()
+    { 
+        return true;
+    }
+    public override async Task<bool> Submit()
     {
         UserLogin dataLogin = new UserLogin();
         dataLogin.Mail = this.Login;
         dataLogin.PasswordHash = this.Password; // userEditor.Hash.GetHash(this.Password);
-        bool result = userEditor.Checker.CheckPass(dataLogin);
-        this.Visible = result;
-        this.SystemText = result ? "We passed login!": "Login or password is wrong!";
+        return await userEditor.Checker.CheckPass(dataLogin);
+    }
+
+    public override async Task ErrorEvent()
+    {
+        this.Visible = true;
+        this.SystemText =  "Login or password is wrong!";
+        return;
     }
 }

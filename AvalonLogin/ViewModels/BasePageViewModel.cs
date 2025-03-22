@@ -14,14 +14,25 @@ public abstract class BasePageViewModel : ViewModelBase
     /// <summary>
     /// Подтвердить действие отправив команду
     /// </summary>
-    public virtual bool Submit { get; set; }
+    public virtual async Task<bool> Submit()
+    {
+        return false;
+    }
 
     /// <summary>
     /// Вернутся назад (отменить действие)
     /// </summary>
-    public virtual bool Return { get; set; }
+    public virtual async Task<bool> Return()
+    {
+        return false;
+    }
 
-    public virtual string StSubmit { get => ""; }
-    public virtual string StCancel { get => "Cancel"; } 
+    public virtual string StSubmit { get => "";  }
+    public virtual string StCancel { get => "Cancel"; }
+
+    public virtual async Task ErrorEvent()
+    {
+        return;
+    }
 }
 

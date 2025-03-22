@@ -24,11 +24,11 @@
 		<TextBox Name="Login" Text="{Binding Login}" Watermark="Enter your email"/>
 		<TextBlock Margin="0 5" Text="{Binding PasswordLable, Mode=OneWay}">Password:</TextBlock>
 		<TextBox Name="Password" Text="{Binding Password}" PasswordChar="*" Watermark="Enter your password"/>
-		<TextBlock Margin="0 5"  IsVisible="{Binding Visible}" Foreground="Red" FontSize="12" Text="{Binding SystemText, Mode=OneWay}">Password:</TextBlock>
+		
 		<Grid ColumnDefinitions="*,*" RowDefinitions="*, *" >
-			<Button Command="{Binding LoginCommand}" Margin="0 5 0 5" Grid.Column="1"  Name="LoginButton" HorizontalAlignment="Right"> Login </Button>
-			<Button Command="{Binding CancelButton}" Margin="0 5 0 5" Grid.Column="0" Name="CancelButton" HorizontalAlignment="Left"> Cancel </Button>
-			<Button Margin="0 5 0 5" Click="" MinWidth="190" Grid.Row="1" Name="RegButton" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center"> Registration new user </Button>
+			<TextBlock Margin="0 5" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding Visible}" Foreground="Red" FontSize="12" Text="{Binding SystemText, Mode=OneWay}">Password:</TextBlock>
+			<Button Command="{Binding RegistrationComand}" Margin="0 5 0 5" Click="" MinWidth="210" Grid.Row="1" Name="RegButton" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center"> Registration new user </Button>
+			
 		</Grid>
 
 	</StackPanel>

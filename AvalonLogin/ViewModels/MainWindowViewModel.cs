@@ -63,20 +63,32 @@ public class MainWindowViewModel: ViewModelBase
         new RegitrationViewModel()
     };
 
-    private void Cncl()
+    private async void Cncl()
     {
-        int index = _pageCollection.IndexOf(CurrentPage) - 1;
-        stSubmit = _pageCollection[index].StSubmit;
-        CurrentPage = _pageCollection[index];
+        if (await CurrentPage.Return())
+        {
+            int index = _pageCollection.IndexOf(CurrentPage) - 1;
+            stSubmit = _pageCollection[index].StSubmit;
+            CurrentPage = _pageCollection[index];
+        }else
+        {
+            await CurrentPage.ErrorEvent();
+        }
+
     }
 
-    private void Sbm()
+    private async void Sbm()
     {
-        int index = _pageCollection.IndexOf(CurrentPage) + 1;
-        stSubmit = _pageCollection[index].StSubmit;
-        CurrentPage = _pageCollection[index];
+        if (await CurrentPage.Submit())
+        {
+            int index = _pageCollection.IndexOf(CurrentPage) + 1;
+            stSubmit = _pageCollection[index].StSubmit;
+            CurrentPage = _pageCollection[index];
+        }else 
+        {
+            await CurrentPage.ErrorEvent();
+        }
     }
-
 
  }
 

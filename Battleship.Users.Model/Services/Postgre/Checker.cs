@@ -1,6 +1,7 @@
 ﻿using Battleship.Users.Common.DTO;
 using Battleship.Users.Common.IServices;
 using Battleship.Users.Model.Data.Postgre;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,13 @@ namespace Battleship.Users.Model.Services.Postgre
             _connectToDb = connect;
         }
         
-        public bool CheckPass(UserLogin user)
+        public async Task<bool> CheckPass(UserLogin user)
         {
             try
             {
                 using (UserDbContext context = new UserDbContext(_connectToDb))
                 {
-                    UserDB userDb = context.Users.Where(u => u.Mail == user.Mail).FirstOrDefault();
+                    UserDB userDb = await context.Users.Where(u => u.Mail == user.Mail).FirstOrDefaultAsync();
                     if (userDb != null)
                     {
                         return userDb.PasswordHash == user.PasswordHash;
@@ -41,7 +42,7 @@ namespace Battleship.Users.Model.Services.Postgre
             return false;
         }
 
-        public string GetToken(UserLogin user)
+        public async Task<string> GetToken(UserLogin user)
         {
             throw new NotImplementedException();
         }
