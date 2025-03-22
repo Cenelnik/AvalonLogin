@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace AvalonLogin.ViewModels;
 
 public class MainWindowViewModel: ViewModelBase
- {
+{
     private static IUserEditorable _userEditor;
     private BasePageViewModel _curetPage;
     private string _stSubmit = "";
@@ -22,20 +22,24 @@ public class MainWindowViewModel: ViewModelBase
     }
     public MainWindowViewModel(IUserEditorable Editor)
     {
+        _userEditor = Editor;
+
+        _pageCollection.Add(new LoginViewModel(Editor));
+        _pageCollection.Add(new GameViewModel());
+        _pageCollection.Add(new RegitrationViewModel());
+
         CurrentPage = _pageCollection[0];
         stSubmit = CurrentPage.StSubmit;
         stCancel = CurrentPage.StCancel;
-        _userEditor = Editor;
 
         CancelCommand = ReactiveCommand.Create(Cncl);
-
         SubmittCommand = ReactiveCommand.Create(Sbm);
     }
 
     public BasePageViewModel CurrentPage
     {
         get { return _curetPage; }
-        private set { this.RaiseAndSetIfChanged(ref _curetPage, value); }
+        protected set { this.RaiseAndSetIfChanged(ref _curetPage, value); }
     }
 
     public string stSubmit
@@ -56,21 +60,27 @@ public class MainWindowViewModel: ViewModelBase
 
     public ICommand SubmittCommand { get; }
 
-    private BasePageViewModel[] _pageCollection =
-    {
-        new LoginViewModel(_userEditor),
-        new GameViewModel(),
-        new RegitrationViewModel()
-    };
+    private List<BasePageViewModel> _pageCollection = new List<BasePageViewModel>();
 
     private async void Cncl()
     {
         if (await CurrentPage.Return())
         {
-            int index = _pageCollection.IndexOf(CurrentPage) - 1;
-            stSubmit = _pageCollection[index].StSubmit;
-            CurrentPage = _pageCollection[index];
-        }else
+            switch (CurrentPage.StSubmit)
+            {
+                case "Login":
+                    CurrentPage = _pageCollection[2];
+                    break;
+
+                case "Registration":
+                    CurrentPage = _pageCollection[0];
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        else
         {
             await CurrentPage.ErrorEvent();
         }
@@ -81,10 +91,21 @@ public class MainWindowViewModel: ViewModelBase
     {
         if (await CurrentPage.Submit())
         {
-            int index = _pageCollection.IndexOf(CurrentPage) + 1;
-            stSubmit = _pageCollection[index].StSubmit;
-            CurrentPage = _pageCollection[index];
-        }else 
+            switch (CurrentPage.StSubmit)
+            {
+                case "Login":
+                    CurrentPage = _pageCollection[1];
+                    break;
+
+                case "Registration":
+                    CurrentPage = _pageCollection[0];
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        else 
         {
             await CurrentPage.ErrorEvent();
         }

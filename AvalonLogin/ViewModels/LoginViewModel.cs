@@ -30,7 +30,7 @@ public class LoginViewModel : BasePageViewModel
 
     private bool _visible = false;
     public bool Visible { get => _visible; set => this.RaiseAndSetIfChanged(ref _visible, value); }
-    private string _loginLable = "Write your login:";
+    private string _loginLable = "Write your email:";
     public string LoginLable { get => _loginLable; set => this.RaiseAndSetIfChanged(ref _loginLable, value); } 
     private string _passwordLable = "Write your password:";
     public string PasswordLable { get => _passwordLable; set => this.RaiseAndSetIfChanged(ref _passwordLable, value); }
@@ -57,6 +57,11 @@ public class LoginViewModel : BasePageViewModel
         UserLogin dataLogin = new UserLogin();
         dataLogin.Mail = this.Login;
         dataLogin.PasswordHash = this.Password; // userEditor.Hash.GetHash(this.Password);
+        if (await userEditor.Checker.CheckPass(dataLogin))
+        {
+            this.CurrentPage = new GameViewModel();
+            return true;
+        }
         return await userEditor.Checker.CheckPass(dataLogin);
     }
 
@@ -66,4 +71,6 @@ public class LoginViewModel : BasePageViewModel
         this.SystemText =  "Login or password is wrong!";
         return;
     }
+
+    BasePageViewModel nextPage() => new GameViewModel();
 }

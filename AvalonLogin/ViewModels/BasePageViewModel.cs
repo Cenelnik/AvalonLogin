@@ -27,9 +27,10 @@ public abstract class BasePageViewModel : ViewModelBase
         return false;
     }
 
-    public virtual string StSubmit { get => "";  }
+    public virtual string StSubmit { get => ""; }
     public virtual string StCancel { get => "Cancel"; }
 
+    public virtual BasePageViewModel CurrentPage { get; protected set; }
     public virtual async Task ErrorEvent()
     {
         return;
