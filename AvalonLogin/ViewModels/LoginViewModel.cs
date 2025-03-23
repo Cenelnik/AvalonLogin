@@ -59,7 +59,6 @@ public class LoginViewModel : BasePageViewModel
         dataLogin.PasswordHash = this.Password; // userEditor.Hash.GetHash(this.Password);
         if (await userEditor.Checker.CheckPass(dataLogin))
         {
-            this.CurrentPage = new GameViewModel();
             return true;
         }
         return await userEditor.Checker.CheckPass(dataLogin);

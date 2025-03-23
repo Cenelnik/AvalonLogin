@@ -12,7 +12,7 @@ using ReactiveUI;
 public class GameViewModel : BasePageViewModel
 {
     public GameViewModel()
-    { 
+    {
     }
     public override string StSubmit { get => "Play"; }
 

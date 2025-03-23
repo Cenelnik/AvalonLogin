@@ -16,7 +16,7 @@ namespace Battleship.Users.Model.Services.Postgre
         { 
             _connectToDb = connect;
         }
-        public bool Exec(UserRegistration newUser)
+        public async Task<bool> Exec(UserRegistration newUser)
         {
             using (UserDbContext context = new UserDbContext(_connectToDb))
             {
@@ -30,6 +30,7 @@ namespace Battleship.Users.Model.Services.Postgre
                     newUserDB.PasswordHash = newUser.PasswordHash;
                     newUserDB.Guid = Guid.NewGuid();
                     context.Users.Add(newUserDB);
+                    await context.SaveChangesAsync();
                     return true;
                 }catch (Exception ex) 
                 {

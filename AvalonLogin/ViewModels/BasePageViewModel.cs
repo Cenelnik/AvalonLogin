@@ -11,6 +11,8 @@ namespace  AvalonLogin.ViewModels;
 /// </summary>
 public abstract class BasePageViewModel : ViewModelBase
 {
+    protected string _stSubmit = "";
+    protected string _stCancel = "";
     /// <summary>
     /// Подтвердить действие отправив команду
     /// </summary>
@@ -27,7 +29,7 @@ public abstract class BasePageViewModel : ViewModelBase
         return false;
     }
 
-    public virtual string StSubmit { get => ""; }
+    public virtual string StSubmit { get => ""; } // _stSubmit; protected set { _stSubmit = value; } 
     public virtual string StCancel { get => "Cancel"; }
 
     public virtual BasePageViewModel CurrentPage { get; protected set; }

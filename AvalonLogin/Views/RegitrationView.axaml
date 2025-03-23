@@ -7,20 +7,17 @@
 	x:Class="AvalonLogin.Views.RegitrationView"
 	xmlns:vm="using:AvalonLogin.ViewModels"
 	x:DataType="vm:RegitrationViewModel"
-	MinHeight="350"
-	MinWidth="300"
-	Height="350"
-	Width="300"
+	
 			 >
 	<Design.DataContext>
 		<vm:RegitrationViewModel />
 	</Design.DataContext>
-	<StackPanel VerticalAlignment="Center" Spacing="5">
-		<TextBox Name="Login" Text="{Binding Login}" Watermark="Enter your login"/>
-		<TextBox Name="Login" Text="{Binding Email}" Watermark="Enter your email"/>
-		<TextBox Name="Password" Text="{Binding Password1}" PasswordChar="*" Watermark="Enter your password"/>
-		<TextBox Name="Password" Text="{Binding Password2}" PasswordChar="*" Watermark="Repite your password"/>
-		<TextBlock Margin="0 5" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding Visible}" Foreground="Red" FontSize="12" Text="{Binding SystemText, Mode=OneWay}">Password:</TextBlock>
+	<StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10 10" >
+		<TextBox Margin="0 5" Name="Login" Text="{Binding Login}" Watermark="Enter your login"  VerticalAlignment="Top"/>
+		<TextBox Margin="0 5" Name="Email" Text="{Binding Email}" Watermark="Enter your email"  />
+		<TextBox  Margin="0 5" Name="Password1" Text="{Binding Password1}" PasswordChar="*" Watermark="Enter your password" />
+		<TextBox Margin="0 5" Name="Password2" Text="{Binding Password2}" PasswordChar="*" Watermark="Repite your password"  />
+		<TextBlock Margin="0 5" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding Visible}" Foreground="Red" FontSize="14" Text="{Binding SystemText, Mode=OneWay}" >Password:</TextBlock>
 	</StackPanel>	
 	
 </UserControl>

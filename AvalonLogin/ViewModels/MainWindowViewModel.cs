@@ -17,6 +17,9 @@ public class MainWindowViewModel: ViewModelBase
     private BasePageViewModel _curetPage;
     private string _stSubmit = "";
     private string _stCancel = "Cancel";
+    private int _size = 100;
+    private int _height = 100;
+    private int _width = 100;
     public MainWindowViewModel()
     { 
     }
@@ -26,7 +29,7 @@ public class MainWindowViewModel: ViewModelBase
 
         _pageCollection.Add(new LoginViewModel(Editor));
         _pageCollection.Add(new GameViewModel());
-        _pageCollection.Add(new RegitrationViewModel());
+        _pageCollection.Add(new RegitrationViewModel(Editor));
 
         CurrentPage = _pageCollection[0];
         stSubmit = CurrentPage.StSubmit;
@@ -54,7 +57,31 @@ public class MainWindowViewModel: ViewModelBase
         private set { this.RaiseAndSetIfChanged(ref _stCancel, value); }
     }
 
-    
+    public int HeightWindow
+    {
+        get { return _height; }
+        private set { this.RaiseAndSetIfChanged(ref _height, _size * 4); }
+    }
+
+    public int WidthtWindow
+    {
+        get { return _width; }
+        private set { this.RaiseAndSetIfChanged(ref _width, _size * 3); }
+    }
+
+    public int Size
+    {
+        get
+        {
+            return _size; 
+        }
+
+        private set 
+        {
+            this.RaiseAndSetIfChanged(ref _size, value); 
+        }
+    }
+
 
     public ICommand CancelCommand { get; }
 
@@ -70,10 +97,17 @@ public class MainWindowViewModel: ViewModelBase
             {
                 case "Login":
                     CurrentPage = _pageCollection[2];
+                    stSubmit = CurrentPage.StSubmit;
+                    stCancel = CurrentPage.StCancel;
+                    Size = 120;
+                    WidthtWindow = WidthtWindow;
+                    HeightWindow = HeightWindow;
                     break;
 
                 case "Registration":
                     CurrentPage = _pageCollection[0];
+                    stSubmit = CurrentPage.StSubmit;
+                    stCancel = CurrentPage.StCancel;
                     break;
 
                 default:
@@ -89,26 +123,40 @@ public class MainWindowViewModel: ViewModelBase
 
     private async void Sbm()
     {
-        if (await CurrentPage.Submit())
+        try
         {
-            switch (CurrentPage.StSubmit)
+            if (await CurrentPage.Submit())
             {
-                case "Login":
-                    CurrentPage = _pageCollection[1];
-                    break;
+                switch (CurrentPage.StSubmit)
+                {
+                    case "Login":
+                        CurrentPage = _pageCollection[1];
+                        stSubmit = CurrentPage.StSubmit;
+                        stCancel = CurrentPage.StCancel;
+                        break;
 
-                case "Registration":
-                    CurrentPage = _pageCollection[0];
-                    break;
+                    case "Registration":
+                        CurrentPage = _pageCollection[0];
+                        stSubmit = CurrentPage.StSubmit;
+                        stCancel = CurrentPage.StCancel;
+                        Size = 100;
+                        WidthtWindow = WidthtWindow;
+                        HeightWindow = HeightWindow;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
-        }
-        else 
+            else
+            {
+                await CurrentPage.ErrorEvent();
+            }
+        }catch (Exception ex) 
         {
-            await CurrentPage.ErrorEvent();
+
         }
+        
     }
 
  }
