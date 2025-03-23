@@ -27,6 +27,7 @@ public class LoginViewModel : BasePageViewModel
     {
     }
     public override string StSubmit { get => "Login"; }
+    public override string StCancel { get => "Registration"; }
 
     private bool _visible = false;
     public bool Visible { get => _visible; set => this.RaiseAndSetIfChanged(ref _visible, value); }
@@ -56,7 +57,7 @@ public class LoginViewModel : BasePageViewModel
     {
         UserLogin dataLogin = new UserLogin();
         dataLogin.Mail = this.Login;
-        dataLogin.PasswordHash = this.Password; // userEditor.Hash.GetHash(this.Password);
+        dataLogin.PasswordHash = userEditor.Hash.GetHash(this.Password); 
         if (await userEditor.Checker.CheckPass(dataLogin))
         {
             return true;
