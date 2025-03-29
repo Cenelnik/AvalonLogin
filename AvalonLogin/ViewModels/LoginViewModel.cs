@@ -41,7 +41,7 @@ public class LoginViewModel : BasePageViewModel
     private string _login;
     public string Login { get => _login; set => this.RaiseAndSetIfChanged(ref _login, value); }
     private string _password;   
-    public string Password { get => _login; set => this.RaiseAndSetIfChanged(ref _login, value); }
+    public string Password { get => _password; set => this.RaiseAndSetIfChanged(ref _password, value); }
 
     public void RegistredComand()
     {
@@ -62,7 +62,7 @@ public class LoginViewModel : BasePageViewModel
         {
             return true;
         }
-        return await userEditor.Checker.CheckPass(dataLogin);
+        return false ;
     }
 
     public override async Task ErrorEvent()
@@ -72,5 +72,4 @@ public class LoginViewModel : BasePageViewModel
         return;
     }
 
-    BasePageViewModel nextPage() => new GameViewModel();
 }

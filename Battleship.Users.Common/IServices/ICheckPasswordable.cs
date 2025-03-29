@@ -24,5 +24,18 @@ namespace Battleship.Users.Common.IServices
         /// <param name="user"></param>
         /// <returns></returns>
         public Task<string> GetToken (UserLogin user);
+
+        /// <summary>
+        /// Валидация JWT 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public Task<bool> ValudateToken(string token);
+        /// <summary>
+        /// Update token to set new exp date. 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public Task<string> UpdateToken(string token);
     }
 }
