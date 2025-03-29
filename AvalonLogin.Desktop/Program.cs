@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Avalonia;
 using Avalonia.ReactiveUI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Battleship.Users.Avalonia;
 
 namespace AvalonLogin.Desktop;
 

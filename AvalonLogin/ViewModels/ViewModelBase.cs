@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace AvalonLogin.ViewModels;
+namespace Battleship.Users.Avalonia.ViewModels;
 
 public class ViewModelBase : ReactiveObject
 {

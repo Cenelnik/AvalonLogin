@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls.Templates;
 using Avalonia.Controls;
-using AvalonLogin.ViewModels;
+using Battleship.Users.Avalonia.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using AvalonLogin.ViewModels;
+﻿using Battleship.Users.Avalonia.ViewModels;   
 using Battleship.Users.Common.IServices;
 using DynamicData;
 using ReactiveUI;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AvalonLogin.ViewModels;
+namespace Battleship.Users.Avalonia.ViewModels;
 
 public class MainWindowViewModel: ViewModelBase
 {

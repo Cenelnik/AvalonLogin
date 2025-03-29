@@ -4,8 +4,8 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d" 
-	x:Class="AvalonLogin.Views.RegitrationView"
-	xmlns:vm="using:AvalonLogin.ViewModels"
+	x:Class="Battleship.Users.Avalonia.Views.RegitrationView"
+	xmlns:vm="using:Battleship.Users.Avalonia.ViewModels"
 	x:DataType="vm:RegitrationViewModel"
 	
 			 >

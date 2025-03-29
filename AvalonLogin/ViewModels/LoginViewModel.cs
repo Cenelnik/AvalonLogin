@@ -1,6 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using AvalonLogin.Views;
+using Battleship.Users.Avalonia.Views;
 using ReactiveUI;
 using System.Reactive;
 using Battleship.Users.Common.DTO;
@@ -8,7 +8,7 @@ using Battleship.Users.Common.IServices;
 using ReactiveUI;
 using System.Threading.Tasks;
 
-namespace AvalonLogin.ViewModels;
+namespace Battleship.Users.Avalonia.ViewModels;
 
 public class LoginViewModel : BasePageViewModel
 {

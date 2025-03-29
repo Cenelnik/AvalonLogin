@@ -2,13 +2,13 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
-using AvalonLogin.ViewModels;
-using AvalonLogin.Views;
+using Battleship.Users.Avalonia.ViewModels;
+using Battleship.Users.Avalonia.Views;
 using Battleship.Users.Common.DTO;
 using Battleship.Users.Common.IServices;
 using Battleship.Users.Model.Services.Postgre;
 
-namespace AvalonLogin;
+namespace Battleship.Users.Avalonia;
 
 public partial class App : Application
 {

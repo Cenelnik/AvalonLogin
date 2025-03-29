@@ -1,10 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using AvalonLogin.Views;
+using Battleship.Users.Avalonia.ViewModels;
+using Battleship.Users.Avalonia.Views;
 using ReactiveUI;
 using System.Reactive;
 
-namespace AvalonLogin.ViewModels;
+namespace Battleship.Users.Avalonia.ViewModels;
 
 using Battleship.Users.Common.DTO;
 using Battleship.Users.Common.IServices;

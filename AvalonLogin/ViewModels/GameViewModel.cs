@@ -1,13 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using AvalonLogin.Views;
+using Battleship.Users.Avalonia.Views;
 using ReactiveUI;
 using System.Reactive;
 
-namespace AvalonLogin.ViewModels;
-
-using AvalonLogin.Views;
-using ReactiveUI;
+namespace Battleship.Users.Avalonia.ViewModels;
 
 public class GameViewModel : BasePageViewModel
 {

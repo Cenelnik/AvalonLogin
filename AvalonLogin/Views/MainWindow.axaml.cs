@@ -1,9 +1,9 @@
 ﻿using Avalonia.Controls;
-using AvalonLogin.ViewModels;
+using Battleship.Users.Avalonia.ViewModels;
 using System;
 using System.Threading.Tasks;
 
-namespace AvalonLogin.Views;
+namespace Battleship.Users.Avalonia.Views;
 
 public partial class MainWindow : Window
 {

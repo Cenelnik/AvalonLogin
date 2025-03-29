@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace  AvalonLogin.ViewModels;
+namespace Battleship.Users.Avalonia.ViewModels;
 
 /// <summary>
 /// Модель базового функционала любой страницы

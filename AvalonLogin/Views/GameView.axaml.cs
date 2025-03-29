@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace  AvalonLogin.Views
+namespace Battleship.Users.Avalonia.Views
 {
     public partial class GameView : UserControl
     {
