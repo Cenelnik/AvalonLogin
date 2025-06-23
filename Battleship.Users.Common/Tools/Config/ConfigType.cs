@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Battleship.Users.Model.Tools.Configs
+namespace Battleship.Users.Common.Tools.Config
 {
     public enum ConfigType
     {
-        DataBaseConnectionConfig,
-        KeyCloakConnectionConfig
+        DataBaseConnection,
+        KeyCloakConnection
     }
 }

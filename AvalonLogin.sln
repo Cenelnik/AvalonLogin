@@ -20,6 +20,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battleship.Users.Model", "Battleship.Users.Model\Battleship.Users.Model.csproj", "{B3A96DD9-200E-40CB-A23A-702301724BE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{1860EFFF-6ECC-4CC4-B22D-1432D398C7FC}"
+	ProjectSection(SolutionItems) = preProject
+		config.json = config.json
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posgre", "Posgre", "{DFA0FDFB-36E7-40A1-A9E1-219BB8D81AC8}"
 	ProjectSection(SolutionItems) = preProject

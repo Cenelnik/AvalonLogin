@@ -1,0 +1,26 @@
+{
+  "TypeConf": "DataBaseConnection",
+
+  "DataBaseConnection": {
+    "ConnectionString": "Server=localhost;Port=5432;User Id=postgres;Password=1HUF!zLRnCKM-kV0;Database=Project"
+  },
+
+  "KeyCloakConnection": [
+    {
+      "Name": "Manager",
+      "Realm": "TestUsers",
+      "ClientId": "Test-client",
+      "ClientSecret": "6PXOq1HUkxeuBRJOfL2NOYPllalrQ3ys",
+      "Host": "http://127.0.0.1:8081"
+    },
+    {
+      "Name": "Admin",
+      "Realm": "TestUsers",
+      "ClientId": "admin-cli",
+      "ClientSecret": "nkfGNEmGk4RBXLyWXGe7gPvGiw7o6qpv",
+      "Host": "http://127.0.0.1:8081"
+    }
+  ]
+}
+
+            

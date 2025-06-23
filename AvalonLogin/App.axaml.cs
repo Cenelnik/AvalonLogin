@@ -6,9 +6,11 @@ using Battleship.Users.Avalonia.ViewModels;
 using Battleship.Users.Avalonia.Views;
 using Battleship.Users.Common.DTO;
 using Battleship.Users.Common.IServices;
+using Battleship.Users.Common.Tools.Config;
 using Battleship.Users.Model.Services.KeyCloak;
 using Battleship.Users.Model.Services.Postgre;
 using Battleship.Users.Model.Tools.Configs;
+using System;
 
 namespace Battleship.Users.Avalonia;
 
@@ -22,8 +24,22 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        userEditor = new User("Server=localhost;Port=5432;User Id=postgres;Password=1HUF!zLRnCKM-kV0;Database=Project");
-        userEditor = new UserKeyCloak(new Configurator(ConfigType.KeyCloakConnectionConfig));
+        //userEditor = new User("Server=localhost;Port=5432;User Id=postgres;Password=1HUF!zLRnCKM-kV0;Database=Project");
+        BaseConfig baseConfig = new Configurator();
+        switch(baseConfig.TypeConf)
+        {
+            case ConfigType.DataBaseConnection:
+                userEditor = new User($"{baseConfig.DataBaseConnection.ConnectionString}");
+                break;
+
+            case ConfigType.KeyCloakConnection:
+                userEditor = new UserKeyCloak(new Configurator());
+                break;
+
+            default:
+                throw new Exception("Uncorrect config.");
+        }
+        //userEditor = new UserKeyCloak(new Configurator());
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
