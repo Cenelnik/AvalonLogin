@@ -24,8 +24,7 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        //userEditor = new User("Server=localhost;Port=5432;User Id=postgres;Password=1HUF!zLRnCKM-kV0;Database=Project");
-        BaseConfig baseConfig = new Configurator();
+        BaseConfig baseConfig = new Configurator(@".\config.json");
         switch(baseConfig.TypeConf)
         {
             case ConfigType.DataBaseConnection:
@@ -33,13 +32,12 @@ public partial class App : Application
                 break;
 
             case ConfigType.KeyCloakConnection:
-                userEditor = new UserKeyCloak(new Configurator());
+                userEditor = new UserKeyCloak(new Configurator(@".\config.json"));
                 break;
 
             default:
                 throw new Exception("Uncorrect config.");
         }
-        //userEditor = new UserKeyCloak(new Configurator());
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
