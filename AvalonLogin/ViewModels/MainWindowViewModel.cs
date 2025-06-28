@@ -1,4 +1,7 @@
-﻿using Battleship.Users.Avalonia.ViewModels;   
+﻿using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
+using Battleship.Users.Avalonia.ViewModels;   
 using Battleship.Users.Common.IServices;
 using DynamicData;
 using ReactiveUI;
@@ -20,6 +23,7 @@ public class MainWindowViewModel: ViewModelBase
     private int _size = 100;
     private int _height = 100;
     private int _width = 100;
+    private bool _visibleSubmit = true;
     public MainWindowViewModel()
     { 
     }
@@ -38,6 +42,7 @@ public class MainWindowViewModel: ViewModelBase
         CancelCommand = ReactiveCommand.Create(Cncl);
         SubmittCommand = ReactiveCommand.Create(Sbm);
     }
+
 
     public BasePageViewModel CurrentPage
     {
@@ -67,6 +72,12 @@ public class MainWindowViewModel: ViewModelBase
     {
         get { return _width; }
         private set { this.RaiseAndSetIfChanged(ref _width, _size * 3); }
+    }
+
+    public bool VisibleSubmit
+    {
+        get { return _visibleSubmit; }
+        private set { this.RaiseAndSetIfChanged(ref _visibleSubmit, value); }
     }
 
     public int Size
@@ -133,6 +144,11 @@ public class MainWindowViewModel: ViewModelBase
                         CurrentPage = _pageCollection[1];
                         stSubmit = CurrentPage.StSubmit;
                         stCancel = CurrentPage.StCancel;
+                        Size = 200;
+                        WidthtWindow = WidthtWindow;
+                        HeightWindow = HeightWindow;
+                        VisibleSubmit = false;
+                        VisibleSubmit = VisibleSubmit;
                         break;
 
                     case "Registration":
@@ -142,6 +158,11 @@ public class MainWindowViewModel: ViewModelBase
                         Size = 100;
                         WidthtWindow = WidthtWindow;
                         HeightWindow = HeightWindow;
+                        break;
+
+                    case "Play":
+                        _visibleSubmit = false;
+                        VisibleSubmit = VisibleSubmit;
                         break;
 
                     default:
