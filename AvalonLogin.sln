@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{1860EFFF-6ECC-4CC4-B22D-1432D398C7FC}"
 	ProjectSection(SolutionItems) = preProject
 		config.json = config.json
+		packMan.jpg = packMan.jpg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posgre", "Posgre", "{DFA0FDFB-36E7-40A1-A9E1-219BB8D81AC8}"

@@ -13,6 +13,8 @@ namespace Battleship.Users.Avalonia.Views
         public GameView()
         {
             InitializeComponent();
+            Canvas.SetBottom(SnakeBody, 80);
+            Canvas.SetLeft(SnakeBody, 0);
         }
 
         public void PointerEvent(object sender, PointerEventArgs e)
@@ -26,23 +28,22 @@ namespace Battleship.Users.Avalonia.Views
             switch (e.Key)
             {
                 case Key.W or Key.Up:
-                    Canvas.SetBottom(SnakeBody, 50 + Canvas.GetBottom(SnakeBody));
+                    Canvas.SetBottom(SnakeBody, 30 + Canvas.GetBottom(SnakeBody));
                     break;
 
                 case Key.D or Key.Right:
-                    Canvas.SetLeft(SnakeBody, 50 + Canvas.GetLeft(SnakeBody));
+                    Canvas.SetLeft(SnakeBody, 30 + Canvas.GetLeft(SnakeBody));
                     break;
 
                 case Key.A or Key.Left:
-                    Canvas.SetLeft(SnakeBody,  Canvas.GetLeft(SnakeBody) -50);
+                    Canvas.SetLeft(SnakeBody,  Canvas.GetLeft(SnakeBody) -30);
                     break;
 
                 case Key.S or Key.Down:
-                    Canvas.SetBottom(SnakeBody, Canvas.GetBottom(SnakeBody)-50);
+                    Canvas.SetBottom(SnakeBody, Canvas.GetBottom(SnakeBody)-30);
                     break;
 
                 default:
-                    ButtonStartGame.Content = $"{ButtonStartGame.Content}:{e}";
                     break;
 
             }

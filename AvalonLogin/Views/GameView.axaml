@@ -8,12 +8,12 @@
 	x:CompileBindings="True"
 	xmlns:vm="using:Battleship.Users.Avalonia.ViewModels"
 	x:DataType="vm:GameViewModel"
-	KeyDown="KeyEvent">
+	>
 	<Design.DataContext>
-		<vm:GameViewModel />
+		<vm:GameViewModel />	
 	</Design.DataContext>
-	<StackPanel VerticalAlignment="Center" Spacing="5" >
-		
+
+	<StackPanel VerticalAlignment="Center" Spacing="5">
 		<Button 
 			Name="ButtonStartGame" 
 			HorizontalContentAlignment="Center" 
@@ -24,19 +24,23 @@
 			FontSize="16" 
 			FontWeight="SemiBold"
 			Command="{Binding Go}"
-			IsVisible="{Binding VisibleStartGame}">
+			IsVisible="{Binding VisibleStartGame}"
+			>
 			Start to Play!
 		</Button>
-		<Canvas Name="Snake" IsVisible="{Binding VisibleCavas}">
+		
+		<Canvas IsTabStop="True" Background="DarkBlue" Height="800"  Width="580" Name="Snake" IsVisible="{Binding VisibleCavas}" KeyDown="KeyEvent">
 			<Rectangle Width="30" Height="30" Name="SnakeBody" PointerEntered="PointerEvent">
-				<Rectangle.Fill>Red</Rectangle.Fill>
+				
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\packMan2.png"></ImageBrush>
+				</Rectangle.Fill>
+				
 			</Rectangle>
 			<Canvas.Children>
-				<Button Height="50" Width="50" KeyDown="KeyEvent"></Button>
+				<RadioButton Name="SnakeAction" Height="50" Width="100" IsTabStop="True" >GO</RadioButton>
 			</Canvas.Children>
-			<Canvas.KeyBindings>
-				<KeyBinding Gesture="Q"></KeyBinding>
-			</Canvas.KeyBindings>
+
 		</Canvas>
 	</StackPanel>
 
