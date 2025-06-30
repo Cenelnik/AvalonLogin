@@ -24,7 +24,7 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        BaseConfig baseConfig = new Configurator(@".\config.json");
+        BaseConfig baseConfig =  Configurator.GetConfig(@".\config.json");
         switch(baseConfig.TypeConf)
         {
             case ConfigType.DataBaseConnection:
@@ -32,7 +32,7 @@ public partial class App : Application
                 break;
 
             case ConfigType.KeyCloakConnection:
-                userEditor = new UserKeyCloak(new Configurator(@".\config.json"));
+                userEditor = new UserKeyCloak(baseConfig);
                 break;
 
             default:

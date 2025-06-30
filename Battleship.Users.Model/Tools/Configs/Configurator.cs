@@ -7,10 +7,26 @@ namespace Battleship.Users.Model.Tools.Configs
 {
     public class Configurator : BaseConfig
     {
-        public Configurator(string pathToConf)
+        private static Configurator instanceConfigurator;
+        private static object syncObj = new Object();
+        private Configurator(string pathToConf)
         {
             Init(pathToConf);
 
+        }
+        public static Configurator GetConfig(string pathToConf)
+        {
+            if(instanceConfigurator == null)
+            {
+                lock(syncObj)
+                {
+                    if(instanceConfigurator == null)
+                    {
+                        instanceConfigurator = new Configurator(pathToConf);
+                    }
+                }
+            }
+            return instanceConfigurator;
         }
 
         void Init(string pathToConf)
