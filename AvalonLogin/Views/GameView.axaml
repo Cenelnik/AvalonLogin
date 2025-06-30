@@ -31,16 +31,38 @@
 		
 		<Canvas IsTabStop="True" Background="DarkBlue" Height="800"  Width="580" Name="Snake" IsVisible="{Binding VisibleCavas}" KeyDown="KeyEvent">
 			<Rectangle Width="30" Height="30" Name="SnakeBody" PointerEntered="PointerEvent">
-				
 				<Rectangle.Fill>
 					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\packMan2.png"></ImageBrush>
 				</Rectangle.Fill>
-				
 			</Rectangle>
+			
+			<Rectangle Width="30" Height="30" Name="Ghost1">
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\ghost.png"></ImageBrush>
+				</Rectangle.Fill>	
+			</Rectangle>
+			<Rectangle Width="30" Height="30" Name="Ghost2">
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\ghost.png"></ImageBrush>
+				</Rectangle.Fill>	
+			</Rectangle>
+			<Rectangle Width="30" Height="30" Name="Ghost3">
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\ghost.png"></ImageBrush>
+				</Rectangle.Fill>	
+			</Rectangle>
+			
 			<Canvas.Children>
-				<RadioButton Name="SnakeAction" Height="50" Width="100" IsTabStop="True" >GO</RadioButton>
+				<RadioButton  Name="SnakeAction" Height="50" Width="100" IsTabStop="True" >GO</RadioButton>
 			</Canvas.Children>
-
+			
+			<Canvas.Children>
+				<TextBlock Name="Lable" Height="50" Width="580" HorizontalAlignment="Right" VerticalAlignment="Top" Text="{Binding LableSt}" />
+			</Canvas.Children>
+		
+			<Canvas.Children>
+				<TextBlock Name="WinLable" Height="50" Width="580" HorizontalAlignment="Center" VerticalAlignment="Top" Text="YOU ARE WIN!" FontSize="30" Foreground="Red" />
+			</Canvas.Children>
 		</Canvas>
 	</StackPanel>
 
