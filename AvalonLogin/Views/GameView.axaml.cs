@@ -17,7 +17,7 @@ namespace Battleship.Users.Avalonia.Views
         public GameView()
         {
             InitializeComponent();
-            Canvas.SetBottom(SnakeBody, 80);
+            Canvas.SetBottom(SnakeBody, 90);
             Canvas.SetLeft(SnakeBody, 0);
             Canvas.SetBottom(Ghost1, 380);
             Canvas.SetLeft(Ghost1, 300);
@@ -46,7 +46,7 @@ namespace Battleship.Users.Avalonia.Views
                 case Key.W or Key.Up:
                     if(30 + Canvas.GetBottom(SnakeBody) >= battleField.HeightSize)
                     {
-                        Canvas.SetBottom(SnakeBody, 80);
+                        Canvas.SetBottom(SnakeBody, 90);//80
                     }else
                     {
                         Canvas.SetBottom(SnakeBody, 30 + Canvas.GetBottom(SnakeBody));
@@ -90,8 +90,7 @@ namespace Battleship.Users.Avalonia.Views
 
             battleField.NewRaund();
 
-            
-            Lable.Text = $"PacMan={Canvas.GetBottom(SnakeBody)}:{Canvas.GetLeft(SnakeBody)}; Ghost={Canvas.GetBottom(Ghost1)}:{Canvas.GetLeft(Ghost1)}";
+            Lable.Text = $"PacMan={Canvas.GetBottom(SnakeBody)}:{Canvas.GetLeft(SnakeBody)}; Ghost={Canvas.GetBottom(Ghost1)}:{Canvas.GetLeft(Ghost1)} Ghost2={Canvas.GetBottom(Ghost2)}:{Canvas.GetLeft(Ghost2)} Ghost3={Canvas.GetBottom(Ghost3)}:{Canvas.GetLeft(Ghost3)}";
             foreach (GhostObject ghost in battleField.Ghosts.Where(n => n.IsVisible == true))
             {
                 switch (ghost.Name)
@@ -112,12 +111,29 @@ namespace Battleship.Users.Avalonia.Views
                         break;
                 }
 
+            }
+            battleField.ResultRaund(new Position((int)Canvas.GetLeft(SnakeBody), (int)Canvas.GetBottom(SnakeBody)));
+            foreach(GhostObject ghost in battleField.Ghosts)
+            {
+                switch (ghost.Name)
+                {
+                    case "Ghost1":
+                        Ghost1.IsVisible = ghost.IsVisible;
+                        break;
 
-                //if (Canvas.GetBottom(SnakeBody) == Canvas.GetBottom(Ghost1) && Canvas.GetLeft(Ghost1) == Canvas.GetLeft(SnakeBody))
-                //{
-                //    WinLable.IsVisible = true;
-                //    Ghost1.IsVisible = false;
-                //}
+                    case "Ghost2":
+                        Ghost2.IsVisible = ghost.IsVisible;
+                        break;
+
+                    case "Ghost3":
+                        Ghost3.IsVisible = ghost.IsVisible;
+                        break;
+                }
+            }
+            if(battleField.Ghosts.Where(n => n.IsVisible == true).ToList().Count == 0)
+            {
+                WinLable.IsVisible = true;
+                Canvas.SetBottom(WinLable, 650);
             }
 
         }
@@ -136,6 +152,10 @@ namespace Battleship.Users.Avalonia.Views
             public void NewRaund()
             {
                 Parallel.ForEach<GhostObject>(Ghosts, n => n.Move(WidthSize, HeightSize));
+            }
+            public void ResultRaund(Position curentPositionUser)
+            {
+                Parallel.ForEach<GhostObject>(Ghosts, n => n.ResultMoving(curentPositionUser));
             }
 
         }
@@ -199,6 +219,12 @@ namespace Battleship.Users.Avalonia.Views
                         break;
                 }
                 return CurrentPosition;
+            }
+
+            public void ResultMoving(Position userPosition)
+            {
+                if(Math.Abs(CurrentPosition.X - userPosition.X) <= 10)
+                    this.IsVisible = false;
             }
         }
         class Position
