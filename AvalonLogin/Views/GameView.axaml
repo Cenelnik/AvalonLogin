@@ -1,0 +1,70 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" 
+	x:Class="Battleship.Users.Avalonia.Views.GameView"
+	x:CompileBindings="True"
+	xmlns:vm="using:Battleship.Users.Avalonia.ViewModels"
+	x:DataType="vm:GameViewModel"
+	>
+	<Design.DataContext>
+		<vm:GameViewModel />	
+	</Design.DataContext>
+
+	<StackPanel VerticalAlignment="Center" Spacing="5">
+		<Button 
+			Name="ButtonStartGame" 
+			HorizontalContentAlignment="Center" 
+			VerticalContentAlignment="Center" 
+			VerticalAlignment="Center" 
+			HorizontalAlignment="Center" 
+			Height="60" Width="200" 
+			FontSize="16" 
+			FontWeight="SemiBold"
+			Command="{Binding Go}"
+			IsVisible="{Binding VisibleStartGame}"
+			>
+			Start to Play!
+		</Button>
+		
+		<Canvas IsTabStop="True" Background="DarkBlue" Height="800"  Width="580" Name="Snake" IsVisible="{Binding VisibleCavas}" KeyDown="KeyEvent">
+			<Rectangle Width="30" Height="30" Name="SnakeBody" PointerEntered="PointerEvent">
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\packMan2.png"></ImageBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			
+			<Rectangle Width="30" Height="30" Name="Ghost1">
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\ghost.png"></ImageBrush>
+				</Rectangle.Fill>	
+			</Rectangle>
+			<Rectangle Width="30" Height="30" Name="Ghost2">
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\ghost.png"></ImageBrush>
+				</Rectangle.Fill>	
+			</Rectangle>
+			<Rectangle Width="30" Height="30" Name="Ghost3">
+				<Rectangle.Fill>
+					<ImageBrush  Source="C:\Users\AleSol\Documents\hlam\ProfC#Project\AvalonLogin\ghost.png"></ImageBrush>
+				</Rectangle.Fill>	
+			</Rectangle>
+			
+			<Canvas.Children>
+				<RadioButton  Name="SnakeAction" Height="50" Width="100" IsTabStop="True" >GO</RadioButton>
+			</Canvas.Children>
+			
+			<Canvas.Children>
+				<TextBlock Name="Lable" Height="50" Width="580" HorizontalAlignment="Right" VerticalAlignment="Top" Text="{Binding LableSt}" />
+			</Canvas.Children>
+		
+			<Canvas.Children>
+				<TextBlock Name="WinLable" Height="50" Width="580" HorizontalAlignment="Center" VerticalAlignment="Top" Text="YOU ARE WIN!" FontSize="30" Foreground="Red" />
+			</Canvas.Children>
+		</Canvas>
+	</StackPanel>
+
+
+</UserControl>

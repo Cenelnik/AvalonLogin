@@ -7,6 +7,6 @@ namespace Battleship.Users.Common.IServices
     /// </summary>
     public interface INewUserRegisteredable
     {
-        public bool Exec(UserRegistration newUser);
+        public Task<bool> Exec(UserRegistration newUser);
     }
 }

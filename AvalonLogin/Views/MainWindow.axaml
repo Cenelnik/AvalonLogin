@@ -1,20 +1,59 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:AvalonLogin.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:AvalonLogin.Views"
-        x:Class="AvalonLogin.Views.MainWindow"
+		xmlns:vm="using:Battleship.Users.Avalonia.ViewModels"
+        x:Class="Battleship.Users.Avalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
+		x:DataType="vm:MainWindowViewModel"
         Title="Login menu"
 		MinHeight="350"
 		MinWidth="300"
-		Height="350"
-		Width="300">
-        <views:MainView DataContext="{Binding Context}"/>
+		Height="{Binding HeightWindow}"
+		Width="{Binding WidthtWindow}"
+		>
+	
+	<Design.DataContext>
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
+	
 	<Window.Styles>
 		<StyleInclude Source="/Views/MainWindowStyles.axaml"/>
 	</Window.Styles>
+	<Window.KeyBindings>
+		<KeyBinding Gesture="Enter" Command="{Binding SubmittCommand}"/>
+	</Window.KeyBindings>
+
+	<Grid RowDefinitions="*,Auto" Margin="10" Name="Main">
+		<TransitioningContentControl Content="{Binding CurrentPage}" />
+
+		<StackPanel  Grid.Row="1" Orientation="Horizontal" Spacing="5" HorizontalAlignment="Center">
+			<Grid ColumnDefinitions="*,*" RowDefinitions="*, *" HorizontalAlignment="Center">
+				<Button
+					Command="{Binding CancelCommand}" 
+					Content="{Binding stCancel}" 
+					MinWidth="100" 
+					HorizontalAlignment="Left" 
+					Margin="0 5 15 5" 
+					Grid.Column="0"
+					HorizontalContentAlignment="Center"
+					Name="GoBack">
+					
+				</Button>
+				<Button
+					Name="GoNext"
+					Command="{Binding SubmittCommand}" 
+					Content="{Binding stSubmit}" 
+					MinWidth="100" 
+					HorizontalAlignment="Right" 
+					Margin="15 5 0 5" 
+					Grid.Column="1"
+					IsVisible="{Binding VisibleSubmit}"
+					HorizontalContentAlignment="Center">
+				</Button>
+			</Grid>
+		</StackPanel>
+	</Grid>
 
 	
 </Window>

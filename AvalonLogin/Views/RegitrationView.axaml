@@ -1,0 +1,23 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" 
+	x:Class="Battleship.Users.Avalonia.Views.RegitrationView"
+	xmlns:vm="using:Battleship.Users.Avalonia.ViewModels"
+	x:DataType="vm:RegitrationViewModel"
+	
+			 >
+	<Design.DataContext>
+		<vm:RegitrationViewModel />
+	</Design.DataContext>
+	<StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10 10" >
+		<TextBox Margin="0 5" Name="Login" Text="{Binding Login}" Watermark="Enter your login"  VerticalAlignment="Top"/>
+		<TextBox Margin="0 5" Name="Email" Text="{Binding Email}" Watermark="Enter your email"  />
+		<TextBox  Margin="0 5" Name="Password1" Text="{Binding Password1}" PasswordChar="*" Watermark="Enter your password" />
+		<TextBox Margin="0 5" Name="Password2" Text="{Binding Password2}" PasswordChar="*" Watermark="Repite your password"  />
+		<TextBlock Margin="0 5" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding Visible}" Foreground="Red" FontSize="14" Text="{Binding SystemText, Mode=OneWay}" >Password:</TextBlock>
+	</StackPanel>	
+	
+</UserControl>

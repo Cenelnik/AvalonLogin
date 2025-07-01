@@ -2,16 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:AvalonLogin.ViewModels"
+             xmlns:vm="clr-namespace:Battleship.Users.Avalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="350"
-             x:Class="AvalonLogin.Views.MainView"
-             x:DataType="vm:MainViewModel"
+             x:Class="Battleship.Users.Avalonia.Views.LoginView"
+             x:DataType="vm:LoginViewModel"
 			 MinHeight="330"
 			 MinWidth="250">
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-		<vm:MainViewModel />
+		<vm:LoginViewModel />
 		
 	</Design.DataContext>
 
@@ -24,11 +24,11 @@
 		<TextBox Name="Login" Text="{Binding Login}" Watermark="Enter your email"/>
 		<TextBlock Margin="0 5" Text="{Binding PasswordLable, Mode=OneWay}">Password:</TextBlock>
 		<TextBox Name="Password" Text="{Binding Password}" PasswordChar="*" Watermark="Enter your password"/>
-		<TextBlock Margin="0 5"  IsVisible="{Binding Visible}" Foreground="Red" FontSize="12" Text="{Binding SystemText, Mode=OneWay}">Password:</TextBlock>
+		
 		<Grid ColumnDefinitions="*,*" RowDefinitions="*, *" >
-			<Button Command="{Binding LoginCommand}" Margin="0 5 0 5" Grid.Column="1"  Name="LoginButton" HorizontalAlignment="Right"> Login </Button>
-			<Button Command="{Binding CancelButton}" Margin="0 5 0 5" Grid.Column="0" Name="CancelButton" HorizontalAlignment="Left"> Cancel </Button>
-			<Button Margin="0 5 0 5" Click="" MinWidth="190" Grid.Row="1" Name="RegButton" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center"> Registration new user </Button>
+			<TextBlock Margin="0 5" Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding Visible}" Foreground="Red" FontSize="12" Text="{Binding SystemText, Mode=OneWay}">Password:</TextBlock>
+			
+			
 		</Grid>
 
 	</StackPanel>

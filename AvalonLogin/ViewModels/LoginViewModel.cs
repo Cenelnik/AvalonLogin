@@ -1,32 +1,37 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using AvalonLogin.Views;
+using Battleship.Users.Avalonia.Views;
 using ReactiveUI;
 using System.Reactive;
-
-namespace AvalonLogin.ViewModels;
-
-using Battleship.Users.Avalonia.Views;
 using Battleship.Users.Common.DTO;
 using Battleship.Users.Common.IServices;
 using ReactiveUI;
+using System.Threading.Tasks;
 
-public class MainViewModel : ViewModelBase
+namespace Battleship.Users.Avalonia.ViewModels;
+
+public class LoginViewModel : BasePageViewModel
 {
     public IUserEditorable userEditor;
 
     private ViewModelBase _content;
     public ViewModelBase Context { get => _content; set => this._content = value; }
-    public MainViewModel(IUserEditorable Editor)
+    public LoginViewModel(IUserEditorable Editor)
     {
-        LoginCommand = ReactiveCommand.Create(LoginButton);
+        RegistrationComand = ReactiveCommand.Create(RegistredComand);
         Context = this;
         userEditor = Editor;
     }
-    
+
+    public LoginViewModel()
+    {
+    }
+    public override string StSubmit { get => "Login"; }
+    public override string StCancel { get => "Registration"; }
+
     private bool _visible = false;
     public bool Visible { get => _visible; set => this.RaiseAndSetIfChanged(ref _visible, value); }
-    private string _loginLable = "Write your login:";
+    private string _loginLable = "Write your email:";
     public string LoginLable { get => _loginLable; set => this.RaiseAndSetIfChanged(ref _loginLable, value); } 
     private string _passwordLable = "Write your password:";
     public string PasswordLable { get => _passwordLable; set => this.RaiseAndSetIfChanged(ref _passwordLable, value); }
@@ -36,24 +41,35 @@ public class MainViewModel : ViewModelBase
     private string _login;
     public string Login { get => _login; set => this.RaiseAndSetIfChanged(ref _login, value); }
     private string _password;   
-    public string Password { get => _login; set => this.RaiseAndSetIfChanged(ref _login, value); }
+    public string Password { get => _password; set => this.RaiseAndSetIfChanged(ref _password, value); }
 
-    public ReactiveCommand<Unit, Unit> LoginCommand { get; }
-    public void CancelButton()
+    public void RegistredComand()
     {
-        this.Visible = false;
-        this.SystemText = "";
-
+        this.Return();
     }
-    public async void LoginButton()
+
+    public ReactiveCommand<Unit, Unit> RegistrationComand { get; }
+    public override async Task<bool> Return()
+    { 
+        return true;
+    }
+    public override async Task<bool> Submit()
     {
-        //this.SystemText = "skdjvbksjkdbvikujsbfvikujsdbviujsbd;ovbsedujio;bv";
-        //this.Visible = true;
         UserLogin dataLogin = new UserLogin();
         dataLogin.Mail = this.Login;
-        dataLogin.PasswordHash = this.Password; // userEditor.Hash.GetHash(this.Password);
-        bool result = userEditor.Checker.CheckPass(dataLogin);
-        this.Visible = result;
-        this.SystemText = result ? "We passed login!": "Login or password is wrong!";
+        dataLogin.PasswordHash = userEditor.Hash.GetHash(this.Password); 
+        if (await userEditor.Checker.CheckPass(dataLogin))
+        {
+            return true;
+        }
+        return false ;
     }
+
+    public override async Task ErrorEvent()
+    {
+        this.Visible = true;
+        this.SystemText =  "Login or password is wrong!";
+        return;
+    }
+
 }

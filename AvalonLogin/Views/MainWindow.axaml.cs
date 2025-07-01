@@ -1,9 +1,13 @@
 ﻿using Avalonia.Controls;
-using AvalonLogin.ViewModels;
+using Avalonia.Input;
+using Avalonia.Interactivity;
+using Avalonia.Media;
+using Battleship.Users.Avalonia.ViewModels;
 using System;
 using System.Threading.Tasks;
+using Battleship.Users.Avalonia.Views;
 
-namespace AvalonLogin.Views;
+namespace Battleship.Users.Avalonia.Views;
 
 public partial class MainWindow : Window
 {
@@ -11,5 +15,5 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
-
+    
 }
