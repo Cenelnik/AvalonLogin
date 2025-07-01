@@ -1,9 +1,4 @@
 ﻿using Battleship.Game.Logic.Base.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Battleship.Game.Logic.Base.Services
 {
@@ -15,10 +10,12 @@ namespace Battleship.Game.Logic.Base.Services
     /// </summary>
     public abstract class FieldRulesTemplate : LoggicTemplate
     {
-        public FieldRulesTemplate (List<Unit> units)
+        protected Position _userPosition;
+        public FieldRulesTemplate (List<Unit> units, GameField gameField)
         { }
-        public override sealed void RaundAction()
+        public override sealed void RaundAction(Position userPosition)
         {
+            _userPosition = userPosition;
             MoveUnits();
             ActionOnFieled();
             RoundResult();

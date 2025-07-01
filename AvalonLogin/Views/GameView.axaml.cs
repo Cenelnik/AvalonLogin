@@ -1,12 +1,17 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Battleship.Game.Logic.Base.DTO;
+using Battleship.Game.Logic.Base.Services;
+using Battleship.Game.Logic.ConcreteGameLogic;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+//using Battleship.Game.Logic.Base.DTO;
+//using Battleship.Game.Logic.ConcreteGameLogic;
 
 namespace Battleship.Users.Avalonia.Views
 {
@@ -14,6 +19,7 @@ namespace Battleship.Users.Avalonia.Views
     {
         Random _random = new Random();
         BattleField battleField;
+        PacManGameField _gameField;
         public GameView()
         {
             InitializeComponent();
@@ -31,6 +37,14 @@ namespace Battleship.Users.Avalonia.Views
             battleField.Ghosts.Add(new GhostObject("Ghost1", new Position(300, 380)));
             battleField.Ghosts.Add(new GhostObject("Ghost2", new Position(240, 410)));
             battleField.Ghosts.Add(new GhostObject("Ghost3", new Position(360, 350)));
+
+            List<Unit> gosts = new List<Unit>();
+            
+            gosts.Add(new Ghost() { CurrentPosition = new Game.Logic.Base.DTO.Position(300, 380), Name = "Ghost1" });
+            gosts.Add(new Ghost() { CurrentPosition = new Game.Logic.Base.DTO.Position(240, 410), Name = "Ghost2" });
+            gosts.Add(new Ghost() { CurrentPosition = new Game.Logic.Base.DTO.Position(360, 350), Name = "Ghost3" });
+            PacManGameField gameField = new PacManGameField(gosts, 770, 540);
+            _gameField = gameField;
         }
 
         public void PointerEvent(object sender, PointerEventArgs e)
@@ -89,8 +103,12 @@ namespace Battleship.Users.Avalonia.Views
             }
 
             battleField.NewRaund();
+            _gameField.GameLogic.RaundAction(new Game.Logic.Base.DTO.Position((int)Canvas.GetLeft(SnakeBody), (int)Canvas.GetBottom(SnakeBody)));
 
-            Lable.Text = $"PacMan={Canvas.GetBottom(SnakeBody)}:{Canvas.GetLeft(SnakeBody)}; Ghost={Canvas.GetBottom(Ghost1)}:{Canvas.GetLeft(Ghost1)} Ghost2={Canvas.GetBottom(Ghost2)}:{Canvas.GetLeft(Ghost2)} Ghost3={Canvas.GetBottom(Ghost3)}:{Canvas.GetLeft(Ghost3)}";
+            //Lable.Text = $"PacMan={Canvas.GetBottom(SnakeBody)}:{Canvas.GetLeft(SnakeBody)}; Ghost={Canvas.GetBottom(Ghost1)}:{Canvas.GetLeft(Ghost1)} Ghost2={Canvas.GetBottom(Ghost2)}:{Canvas.GetLeft(Ghost2)} Ghost3={Canvas.GetBottom(Ghost3)}:{Canvas.GetLeft(Ghost3)}";
+            Ghost test = (Ghost)_gameField.Units[0];
+            Lable.Text = $"PacMan={Canvas.GetBottom(SnakeBody)}:{Canvas.GetLeft(SnakeBody)}; {test.Name} {_gameField.Units[0].CurrentPosition.X}:{_gameField.Units[0].CurrentPosition.Y}; {_gameField.Units[1].CurrentPosition.X}:{_gameField.Units[1].CurrentPosition.Y}; {_gameField.Units[2].CurrentPosition.X}:{_gameField.Units[2].CurrentPosition.Y}";
+            
             foreach (GhostObject ghost in battleField.Ghosts.Where(n => n.IsVisible == true))
             {
                 switch (ghost.Name)
@@ -223,7 +241,7 @@ namespace Battleship.Users.Avalonia.Views
 
             public void ResultMoving(Position userPosition)
             {
-                if(Math.Abs(CurrentPosition.X - userPosition.X) <= 10)
+                if((Math.Abs(CurrentPosition.X - userPosition.X) <= 10)&& (Math.Abs(CurrentPosition.Y - userPosition.Y) <= 10))
                     this.IsVisible = false;
             }
         }

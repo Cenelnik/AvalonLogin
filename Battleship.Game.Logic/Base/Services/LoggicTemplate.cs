@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Battleship.Game.Logic.Base.DTO;
 
 namespace Battleship.Game.Logic.Base.Services
 {
     public abstract class LoggicTemplate
     {
-        public virtual void RaundAction()
+        public virtual void RaundAction(Position userPosition)
         {
 
         }

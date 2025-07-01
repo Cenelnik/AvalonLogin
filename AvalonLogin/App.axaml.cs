@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-
 using Battleship.Users.Avalonia.ViewModels;
 using Battleship.Users.Avalonia.Views;
 using Battleship.Users.Common.DTO;
